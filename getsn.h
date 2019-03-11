@@ -20,5 +20,6 @@ char *getsn(char s[], int n);
 // "hoge\n" ========> "hog\0" + "e\n" => NULL     => NULL
 //
 // "hog\0"  ========> ?
+// そもそも このような入力は 来ない可能性
 
 #endif
