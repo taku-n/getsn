@@ -2,25 +2,29 @@
 
 char *getsn(char s[], int n)
 {
-    if (fgets(s, n, stdin) == NULL) {
-        s = NULL;
-        return s;
-    }
+	int i;
+	int c;
 
-    char *nlc = strchr(s, '\n');
-    if (nlc) {  // there is a new line character
-        *nlc = '\0';
-    } else {    // there is not a new line character
-        int c = getchar();
-        if (c != '\n' && c != EOF) {
-            do {
-                c = getchar();
-            } while (c != '\n' && c != EOF);
+	for (i = 0; i < n; i++) {
+		c = getchar();
 
-            s = NULL;
-            return s;
-        }
-    }
+		if (c == '\n') {  // a line ends with '\n'
+			s[i] = '\0';
+			break;
+		}
 
-    return s;
+		if (c == EOF) {  // a line ends with EOF
+			s[i] = '\0';
+			break;
+		}
+
+		if (i == n - 1) {  // too long line
+			s = NULL;
+			break;
+		}
+
+		s[i] = c;
+	}
+
+	return s;
 }
